@@ -123,7 +123,7 @@ SIMPLE_DEVICES = [
 
 # Devices with pins that we should leave alone at reset time
 OTHER_DEVICES = [
-  "USB","SD","LCD","JTAG","ESP8266","IR","GPS","BAT","HEARTRATE",
+  "USB","SD","LCD","TV","JTAG","ESP8266","IR","GPS","BAT","HEARTRATE",
   "ACCEL","MAG","TEMP","PRESSURE","SPIFLASH","TOUCH","VIBRATE","MISC"
 ];
 

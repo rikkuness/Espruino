@@ -460,6 +460,19 @@ if "LCD" in board.devices:
   if board.devices["LCD"]["controller"]=="st7789_8bit":
     codeOutDevicePins("LCD","LCD");
 
+if "TV" in board.devices:
+  codeOutDevicePins("TV", "TV")
+  if "width" in board.devices["TV"]:
+    codeOut("#define TV_WIDTH "+str(board.devices["TV"]["width"]))
+  if "height" in board.devices["TV"]:
+    codeOut("#define TV_HEIGHT "+str(board.devices["TV"]["height"]))
+  if "bpp" in board.devices["TV"]:
+    codeOut("#define TV_BPP "+str(board.devices["TV"]["bpp"]))
+  if "video_start_us" in board.devices["TV"]:
+    codeOut("#define TV_VIDEO_START_NS "+str(int(board.devices["TV"]["video_start_us"]*1000)))
+  if board.devices["TV"].get("sync_inverted"):
+    codeOut("#define TV_SYNC_INVERTED 1")
+
 if "SD" in board.devices:
   if "pin_cd" in board.devices["SD"]: codeOutDevicePin("SD", "pin_cd", "SD_DETECT_PIN")
   if "pin_pwr" in board.devices["SD"]: codeOutDevicePin("SD", "pin_pwr", "SD_POWER_PIN")

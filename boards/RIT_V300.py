@@ -8,7 +8,7 @@ info = {
  'default_console' : "EV_SERIAL3", # USART3 connected to ST-LINK Virtual Com Port by default without changing solder bridges
  'default_console_tx' : "D8", # USART3_TX on PD8
  'default_console_rx' : "D9", # USART3_RX on PD9
- 'variables' :  31999, # (512-12)*1024/16-1
+ 'variables' :  29130, # (512-12)*1024/16-1, minus the 45900-byte TV framebuffer (340*270*4bpp/8)
  'binary_name' : 'espruino_%v_rit_v300.bin',
  'build' : {
    'optimizeflags' : '-Os',
@@ -20,9 +20,12 @@ info = {
      #'DEFINES+=-DSAVE_ON_FLASH_MATH', 
      #'DEFINES+=-DESPR_PACKED_SYMPTR', # Pack builtin symbols' offset into pointer to save 2 bytes/symbol
      'INCLUDE += -I$(ROOT)/libs/rit-v300',
+     'DEFINES+=-DESPR_GRAPHICS_INTERNAL',
+     'SOURCES+=libs/graphics/tv.c',
+     'WRAPPERSOURCES+=libs/graphics/jswrap_tv.c',
      'WRAPPERSOURCES+=targets/nucleo/jswrap_nucleo.c',
-     'WRAPPERSOURCES+=targets/rit-v300/jswrap_ritv300.c',
-     'WRAPPERSOURCES+=targets/rit-v300/jswrap_font_fixedsys_16.c',
+     'WRAPPERSOURCES+=libs/rit-v300/jswrap_ritv300.c',
+     'WRAPPERSOURCES+=libs/rit-v300/jswrap_font_fixedsys_16.c',
      'DEFINES+=-DUSE_USB_OTG_FS=1',
      'DEFINES+=-DPIN_NAMES_DIRECT=1', # Package skips out some pins, so we can't assume each port starts from 0
      'STLIB=STM32F767xx',
@@ -74,6 +77,14 @@ devices = {
             'pin_dp' : 'A12',
             'pin_vbus' : 'A9',
             'pin_id' : 'A10', },
+  'TV' : { 'width' : 340, 'height' : 270, 'bpp' : 4,
+           'pin_d0' : 'E0',
+           'pin_d1' : 'E1',
+           'pin_d2' : 'E2',
+           'pin_d3' : 'E3',
+           'pin_sync' : 'G1',
+           'video_start_us' : 15.2,
+           'sync_inverted' : False },
   # TODO: NUCLEO_A and NUCLEO_D Arduino header mappings for Nucleo-144
   # These are temporary values from Nucleo-64 to allow compilation
   'NUCLEO_A' : [ 'A0','A1','A4','B0','C1','C0' ],
