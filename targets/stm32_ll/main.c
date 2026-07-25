@@ -24,6 +24,10 @@ extern void _VECTOR_TABLE;
 
 int main(void){
   SCB->VTOR = (unsigned int)&_VECTOR_TABLE;
+#ifdef STM32F7
+  SCB_EnableICache();
+  SCB_EnableDCache();
+#endif
 
   jshInit();
   jswHWInit();
