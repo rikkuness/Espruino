@@ -25,7 +25,7 @@ info = {
      'WRAPPERSOURCES+=libs/graphics/jswrap_tv.c',
      'WRAPPERSOURCES+=targets/nucleo/jswrap_nucleo.c',
      'WRAPPERSOURCES+=libs/rit-v300/jswrap_ritv300.c',
-     'WRAPPERSOURCES+=libs/rit-v300/jswrap_font_fixedsys_16.c',
+     'WRAPPERSOURCES+=libs/rit-v300/jswrap_font_z_100.c',
      'DEFINES+=-DUSE_USB_OTG_FS=1',
      'DEFINES+=-DPIN_NAMES_DIRECT=1', # Package skips out some pins, so we can't assume each port starts from 0
      'STLIB=STM32F767xx',

@@ -14,4 +14,4 @@
 
 #include "jsvar.h"
 
-JsVar *jswrap_graphics_setFontFixedsys16(JsVar *parent, int scale);
+JsVar *jswrap_graphics_setFontZ100(JsVar *parent, int scale);
